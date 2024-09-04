@@ -7,12 +7,12 @@ import Footer from '../components/template/Footer'
 import Logo from '../components/template/Logo'
 import Main from '../components/template/Main'
 import Nav from '../components/template/Nav'
+import Home from '../components/home/Home'
 
 export default props =>
     <div className="app">
-        <Logo/>
-        <Nav/>
-        <Main icon="shopping-cart" title="Início"
-            subtitle="Cadastro de Produtos"/>
-        <Footer/>
+        <Logo />
+        <Nav />
+        <Home/>
+        <Footer />
     </div>
