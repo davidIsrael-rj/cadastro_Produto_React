@@ -23,6 +23,12 @@ const initialState = {
 export default class ProdutoCrud extends Component {
     state = { ...initialState }
 
+    componentWillMount() {
+        axios(baseUrl).then(resp => {
+            this.setState({ list: resp.data })
+        })
+    }
+
     clear() {
         this.setState({ produto: initialState.produto })
     }
@@ -38,9 +44,9 @@ export default class ProdutoCrud extends Component {
             })
     }
 
-    getUpdateList(produto) {
+    getUpdateList(produto, add = true) {
         const list = this.state.list.filter(p => p.id !== produto.id)
-        list.unshift(produto)
+        if (add) list.unshift(produto)
         return list
     }
 
@@ -98,9 +104,9 @@ export default class ProdutoCrud extends Component {
                                 placeholder='Digite a Alicota' />
                         </div>
                     </div>
-                    
+
                 </div>
-                            <hr />
+                <hr />
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="form-group">
@@ -112,7 +118,7 @@ export default class ProdutoCrud extends Component {
                                 placeholder='Digite o Setor' />
                         </div>
                     </div>
-                    
+
                 </div>
                 <hr />
                 <div className="row">
@@ -131,10 +137,70 @@ export default class ProdutoCrud extends Component {
         )
     }
 
+    load(produto) {
+        this.setState({ produto })
+    }
+
+    remove(produto) {
+        axios.delete(`${baseUrl}/${produto.id}`).then(resp => {
+            const list = this.getUpdateList(produto, false)
+            this.setState({ list })
+        })
+    }
+
+    renderTable(){
+        return(
+            <table className="table mt-4">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Custo</th>
+                        <th>Preço</th>
+                        <th>Alicota</th>
+                        <th>Setor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.renderRows()}
+                </tbody>
+
+            </table>
+        )
+    }
+
+    renderRows(){
+        return this.state.list.map(produto =>{
+            return(
+               <tr key={produto.id}>
+                    <td>{produto.id}</td>
+                    <td>{produto.name}</td>
+                    <td>{produto.custo}</td>
+                    <td>{produto.preco}</td>
+                    <td>{produto.alicota}</td>
+                    <td>{produto.setor}</td>
+                    <td>
+                        <button className="btn btn-warning"
+                            onClick={() => this.load(produto)}>
+                            <i className="fa fa-pencil"></i>
+                        </button>
+                        <button className="btn btn-danger ml-2"
+                            onClick={() => this.remove(produto)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </td>
+               </tr>
+
+            )
+        })
+    }
     render() {
+
         return (
             <Main {...headerProps}>
                 {this.renderForm()}
+                {this.renderTable()}
             </Main>
         )
     }
