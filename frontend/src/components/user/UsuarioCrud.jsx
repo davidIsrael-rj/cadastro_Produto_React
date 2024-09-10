@@ -180,7 +180,6 @@ export default class UsuarioCrud extends Component {
     render() {
         return (
             <Main {...headerProps}>
-                Usuário
                 {this.renderForm()}
                 {this.renderTable()}
             </Main>
