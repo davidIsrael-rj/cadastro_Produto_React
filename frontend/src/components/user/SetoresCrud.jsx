@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Main from '../template/Main'
 import axios from 'axios'
 
-const headerProps ={
-    icon:'users',
+const headerProps = {
+    icon: 'shopping-bag',
     title: 'Setores',
     subtitle: 'Cadastro de Produtos: Incluir, Listar, Alterar e Excluir!'
 }
@@ -11,51 +11,51 @@ const headerProps ={
 const baseUrl = 'http://localhost:3001/setores'
 
 const initialState = {
-    setores:{
-      name: ""
-    }, 
-    list:[]
+    setores: {
+        name: ""
+    },
+    list: []
 }
 
 export default class ProdutoCrud extends Component {
 
-    state = {...initialState}
+    state = { ...initialState }
 
-    componentWillMount(){
+    componentWillMount() {
         axios(baseUrl).then(resp => {
-            this.setState({list: resp.data})
+            this.setState({ list: resp.data })
         })
     }
 
-    clear(){
-        this.setState({setores: initialState.setores})
+    clear() {
+        this.setState({ setores: initialState.setores })
     }
 
-    save(){
+    save() {
         const setores = this.state.setores
         const method = setores.id ? 'put' : 'post'
         const url = setores.id ? `${baseUrl}/${setores.id}` : baseUrl
         axios[method](url, setores)
-            .then(resp =>{
+            .then(resp => {
                 const list = this.getUpdateList(resp.data)
-                this.setState({setores: initialState.setores, list})
+                this.setState({ setores: initialState.setores, list })
             })
     }
 
-    getUpdateList(setores, add = true){
+    getUpdateList(setores, add = true) {
         const list = this.state.list.filter(s => s.id !== setores.id)
-        if(add) list.unshift(setores)
-            return list
+        if (add) list.unshift(setores)
+        return list
     }
 
-    updateField(event){
-        const setores = {...this.state.setores}
+    updateField(event) {
+        const setores = { ...this.state.setores }
         setores[event.target.name] = event.target.value
-        this.setState({setores})
+        this.setState({ setores })
     }
 
-    renderForm(){
-        return(
+    renderForm() {
+        return (
             <div className="form">
                 <div className="row">
                     <div className="col-12 col-md-6">
@@ -68,42 +68,43 @@ export default class ProdutoCrud extends Component {
                                 placeholder='Digite o Nome do Setor' />
                         </div>
                     </div>
-                    <hr />
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-end">
-                            <button className="btn btn-primary m-2"
+                </div>
+                <hr />
+                <div className="row">
+                    <div className="col-12 d-flex justify-content-end">
+                        <button className="btn btn-primary m-2"
                             onClick={e => this.save(e)}>
-                                Salvar
-                            </button>
-                            <button className="btn btn-secondary m-2"
+                            Salvar
+                        </button>
+                        <button className="btn btn-secondary m-2"
                             onClick={e => this.clear(e)}>
-                                Cancelar
-                            </button>
-                        </div>
+                            Cancelar
+                        </button>
                     </div>
                 </div>
             </div>
         )
     }
 
-    load(setores){
-        this.setState({setores})
+    load(setores) {
+        this.setState({ setores })
     }
 
-    remove(setores){
+    remove(setores) {
         axios.delete(`${baseUrl}/${setores.id}`).then(resp => {
             const list = this.getUpdateList(setores, false)
-            this.setState({list})
+            this.setState({ list })
         })
     }
 
-    renderTable(){
-        return(
+    renderTable() {
+        return (
             <table className="table mt-4">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,9 +114,9 @@ export default class ProdutoCrud extends Component {
         )
     }
 
-    renderRows(){
-        return this.state.list.map(setor =>{
-            return(
+    renderRows() {
+        return this.state.list.map(setor => {
+            return (
                 <tr key={setor.id}>
                     <td>{setor.id}</td>
                     <td>{setor.name}</td>
@@ -134,11 +135,11 @@ export default class ProdutoCrud extends Component {
             )
         })
     }
-    render(){
+    render() {
         return (
             <Main {...headerProps}>
-              {this.renderForm()}
-              {this.renderTable()} 
+                {this.renderForm()}
+                {this.renderTable()}
             </Main>
         )
     }

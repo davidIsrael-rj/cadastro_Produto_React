@@ -3,7 +3,7 @@ import Main from '../template/Main'
 import axios from 'axios'
 
 const headerProps = {
-    icon: 'users',
+    icon: 'cart-plus',
     title: 'Produtos',
     subtitle: 'Cadastro de Produtos: Incluir, Listar, Alterar e Excluir!'
 }
