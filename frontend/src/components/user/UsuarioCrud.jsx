@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Main from "../template/Main";
 import axios from "axios";
+import Campo from "../template/Campo";
 
 const headerProps = {
     icon: "users",
@@ -56,46 +57,35 @@ export default class UsuarioCrud extends Component {
         return (
             <div className="form">
                 <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Nome</label>
-                            <input type="text" className="form-control"
-                                name='name'
-                                value={this.state.usuario.name}
-                                onChange={e => this.updateField(e)}
-                                placeholder="Digite o Nome" />
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Endereço</label>
-                            <input type="text" className="form-control"
-                                name='endereco'
-                                value={this.state.usuario.endereco}
-                                onChange={e => this.updateField(e)}
-                                placeholder="Digite o Endereço" />
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Bairro</label>
-                            <input type="text" className="form-control"
-                                name='bairro'
-                                value={this.state.usuario.bairro}
-                                onChange={e => this.updateField(e)}
-                                placeholder="Digite o Bairro" />
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Numero</label>
-                            <input type="text" className="form-control"
-                                name='numero'
-                                value={this.state.usuario.numero}
-                                onChange={e => this.updateField(e)}
-                                placeholder="Digite o Numero" />
-                        </div>
-                    </div>
+                    <Campo
+                        label="Nome"
+                        nome="name"
+                        valor={this.state.usuario.name}
+                        valorMudou={e => this.updateField(e)}
+                        placeholder="Digite o Nome"
+                    />
+                    <Campo
+                        label="Endereço"
+                        nome="endereco"
+                        valor={this.state.usuario.endereco}
+                        valorMudou={e => this.updateField(e)}
+                        placeholder="Digite o Endereço"
+                    />
+                    <Campo
+                        label="Bairro"
+                        nome="bairro"
+                        valor={this.state.usuario.bairro}
+                        valorMudou={e => this.updateField(e)}
+                        placeholder="Digite o Bairro"
+                    />
+                    <Campo
+                        label="Numero"
+                        nome="numero"
+                        valor={this.state.usuario.numero}
+                        valorMudou={e => this.updateField(e)}
+                        placeholder="Digite o Numero"
+                    />
+                    
                     <br />
                 </div>
                 <hr />
@@ -142,8 +132,8 @@ export default class UsuarioCrud extends Component {
         return list
     }
 
-    load(usuario){
-        this.setState({usuario})
+    load(usuario) {
+        this.setState({ usuario })
     }
     remove(usuario) {
         axios.delete(`${baseUrl}/${usuario.id}`).then(resp => {
@@ -162,8 +152,8 @@ export default class UsuarioCrud extends Component {
                     <td>{usuario.numero}</td>
                     <td>
                         <button className="btn btn-warning"
-                        
-                        onClick={() => this.load(usuario)}>
+
+                            onClick={() => this.load(usuario)}>
                             <i className="fa fa-pencil"></i>
                         </button>
                         <button className="btn btn-danger mx-2"
