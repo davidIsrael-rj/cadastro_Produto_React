@@ -25,11 +25,13 @@ class ProdutoCrud extends Component {
 
     state = { ...initialState }
 
+
     componentWillMount() {
         axios(baseUrl).then(resp => {
             this.setState({ list: resp.data })
         })
     }
+
 
     clear() {
         this.setState({ produto: initialState.produto })
@@ -62,67 +64,55 @@ class ProdutoCrud extends Component {
         return (
             <div className="form">
                 <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label >Nome</label>
-                            <input type="text" className='form-control'
-                                name='name'
-                                value={this.state.produto.name}
-                                onChange={e => this.updateField(e)}
-                                placeholder='Digite o Nome' />
-                        </div>
-                    </div>
 
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label >Custo</label>
-                            <input type="text" className='form-control'
-                                name='custo'
-                                value={this.state.produto.custo}
-                                onChange={e => this.updateField(e)}
-                                placeholder='Digite o Custo' />
-                        </div>
-                    </div>
+                    <Campo
+                        label="Nome"
+                        valor={this.state.produto.name}
+                        placeholder="Digite o nome"
+                        nome="name"
+                        valorMudou={e => this.updateField(e)}
+                    />
+
+                    <Campo
+                        label="Custo"
+                        valor={this.state.produto.custo}
+                        placeholder="Digite o Custo"
+                        nome="custo"
+                        valorMudou={e => this.updateField(e)}
+                    />
+
+
 
                 </div>
                 <hr />
                 <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Preco</label>
-                            <input type="text" className="form-control"
-                                name="preco"
-                                value={this.state.produto.preco}
-                                onChange={e => this.updateField(e)}
-                                placeholder='Digite o preço' />
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label >Alicota</label>
-                            <input type="text" className='form-control'
-                                name='alicota'
-                                value={this.state.produto.alicota}
-                                onChange={e => this.updateField(e)}
-                                placeholder='Digite a Alicota' />
-                        </div>
-                    </div>
-
+                    <Campo
+                        label="Preco"
+                        valor={this.state.produto.preco}
+                        placeholder="Digite o Preço"
+                        nome="preco"
+                        valorMudou={e => this.updateField(e)}
+                    />
+                    <Campo
+                        label="Alicota"
+                        valor={this.state.produto.alicota}
+                        placeholder="Digite a Alicota"
+                        nome="alicota"
+                        valorMudou={e => this.updateField(e)}
+                    />
                 </div>
                 <hr />
                 <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Setor</label>
-                            <input type="text" className="form-control"
-                                name="setor"
-                                value={this.state.produto.setor}
-                                onChange={e => this.updateField(e)}
-                                placeholder='Digite o Setor' />
-                        </div>
-                    </div>
+                    <Campo
+                        label="Setor"
+                        valor={this.state.produto.setor}
+                        placeholder="Digite o Setor"
+                        nome="setor"
+                        valorMudou={e => this.updateField(e)}
+                    />
 
                 </div>
+                
                 <hr />
                 <div className="row">
                     <div className="col-12 d-flex justify-content-end">
