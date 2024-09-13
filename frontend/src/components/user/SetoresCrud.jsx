@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Main from '../template/Main'
 import axios from 'axios'
+import Campo from '../template/Campo'
 
 const headerProps = {
     icon: 'shopping-bag',
@@ -58,16 +59,14 @@ export default class ProdutoCrud extends Component {
         return (
             <div className="form">
                 <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Nome</label>
-                            <input type="text" className='form-control'
-                                name='name'
-                                value={this.state.setores.name}
-                                onChange={e => this.updateField(e)}
-                                placeholder='Digite o Nome do Setor' />
-                        </div>
-                    </div>
+                    <Campo
+                        label="Nome"
+                        nome="name"
+                        valor={this.state.setores.name}
+                        valorMudou={e => this.updateField(e)}
+                        placeholder="Digite o nome do Setor"
+                    />
+
                 </div>
                 <hr />
                 <div className="row">
