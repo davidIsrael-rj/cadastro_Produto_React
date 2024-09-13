@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Main from '../template/Main'
 import axios from 'axios'
+import Campo from '../template/Campo'
 
 const headerProps = {
     icon: 'cart-plus',
@@ -20,7 +21,8 @@ const initialState = {
     list: []
 }
 
-export default class ProdutoCrud extends Component {
+class ProdutoCrud extends Component {
+
     state = { ...initialState }
 
     componentWillMount() {
@@ -62,14 +64,15 @@ export default class ProdutoCrud extends Component {
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="form-group">
-                            <label>Nome</label>
-                            <input type="text" className="form-control"
-                                name="name"
+                            <label >Nome</label>
+                            <input type="text" className='form-control'
+                                name='name'
                                 value={this.state.produto.name}
                                 onChange={e => this.updateField(e)}
-                                placeholder='Digite o nome' />
+                                placeholder='Digite o Nome' />
                         </div>
                     </div>
+
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             <label >Custo</label>
@@ -148,8 +151,8 @@ export default class ProdutoCrud extends Component {
         })
     }
 
-    renderTable(){
-        return(
+    renderTable() {
+        return (
             <table className="table mt-4">
                 <thead>
                     <tr>
@@ -170,10 +173,10 @@ export default class ProdutoCrud extends Component {
         )
     }
 
-    renderRows(){
-        return this.state.list.map(produto =>{
-            return(
-               <tr key={produto.id}>
+    renderRows() {
+        return this.state.list.map(produto => {
+            return (
+                <tr key={produto.id}>
                     <td>{produto.id}</td>
                     <td>{produto.name}</td>
                     <td>{produto.custo}</td>
@@ -190,7 +193,7 @@ export default class ProdutoCrud extends Component {
                             <i className="fa fa-trash"></i>
                         </button>
                     </td>
-               </tr>
+                </tr>
 
             )
         })
@@ -205,3 +208,5 @@ export default class ProdutoCrud extends Component {
         )
     }
 }
+
+export default ProdutoCrud
