@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Main from '../template/Main'
 import axios from 'axios'
 import Campo from '../template/Campo'
+import Botao from '../template/botao'
 
 const headerProps = {
     icon: 'cart-plus',
@@ -112,18 +113,20 @@ class ProdutoCrud extends Component {
                     />
 
                 </div>
-                
+
                 <hr />
                 <div className="row">
                     <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-primary m-2"
-                            onClick={e => this.save(e)}>
-                            Salvar
-                        </button>
-                        <button className="btn btn-secondary m-2"
-                            onClick={e => this.clear(e)}>
-                            Cancelar
-                        </button>
+                        <Botao
+                            cor="primary"
+                            nome="Salvar"
+                            funcao={e => this.save(e)}
+                        />
+                        <Botao
+                            cor="secondary"
+                            nome="Cancelar"
+                            funcao={e => this.clear(e)}
+                        />
                     </div>
                 </div>
             </div>

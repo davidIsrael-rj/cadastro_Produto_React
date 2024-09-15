@@ -1,9 +1,12 @@
 import React from "react";
 
-export default function Botao (props){
-    return(
+export default function Botao(props) {
+    return (
         <div>
-            Botao
+            <button className={`btn btn-${props.cor} m-2`}
+                onClick={props.funcao}>
+                {props.nome}
+            </button>
         </div>
     )
 }
