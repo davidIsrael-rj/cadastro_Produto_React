@@ -3,6 +3,7 @@ import Main from "../template/Main";
 import axios from "axios";
 import Campo from "../template/Campo";
 import Botao from "../template/botao";
+import BotaoAcao from "../template/BotaoAcao";
 
 const headerProps = {
     icon: "users",
@@ -154,15 +155,16 @@ export default class UsuarioCrud extends Component {
                     <td>{usuario.bairro}</td>
                     <td>{usuario.numero}</td>
                     <td>
-                        <button className="btn btn-warning"
-
-                            onClick={() => this.load(usuario)}>
-                            <i className="fa fa-pencil"></i>
-                        </button>
-                        <button className="btn btn-danger mx-2"
-                            onClick={() => this.remove(usuario)}>
-                            <i className="fa fa-trash"></i>
-                        </button>
+                    <BotaoAcao
+                            cor='warning'
+                            onClick={() => this.load(usuario)}
+                            icon='pencil'
+                        />
+                        <BotaoAcao
+                            cor='danger'
+                            onClick={() => this.remove(usuario)}
+                            icon='trash'
+                        />
                     </td>
                 </tr>
 

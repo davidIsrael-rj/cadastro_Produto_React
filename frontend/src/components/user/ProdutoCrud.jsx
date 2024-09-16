@@ -3,6 +3,7 @@ import Main from '../template/Main'
 import axios from 'axios'
 import Campo from '../template/Campo'
 import Botao from '../template/botao'
+import BotaoAcao from '../template/BotaoAcao'
 
 const headerProps = {
     icon: 'cart-plus',
@@ -177,14 +178,16 @@ class ProdutoCrud extends Component {
                     <td>{produto.alicota}</td>
                     <td>{produto.setor}</td>
                     <td>
-                        <button className="btn btn-warning"
-                            onClick={() => this.load(produto)}>
-                            <i className="fa fa-pencil"></i>
-                        </button>
-                        <button className="btn btn-danger ml-2"
-                            onClick={() => this.remove(produto)}>
-                            <i className="fa fa-trash"></i>
-                        </button>
+                        <BotaoAcao
+                            cor='warning'
+                            onClick={() => this.load(produto)}
+                            icon='pencil'
+                        />
+                        <BotaoAcao
+                            cor='danger'
+                            onClick={() => this.remove(produto)}
+                            icon='trash'
+                        />                        
                     </td>
                 </tr>
 
